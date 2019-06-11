@@ -1,0 +1,22 @@
+dependencies:
+  build:
+    - android:latest
+    - androidndk:r15c
+    - java:8.202.08
+    - gradle:5.4.1
+build_targets:
+  - name: default
+    commands:
+      - git submodule init
+      - git submodule update
+      - sdkmanager --install tools
+      - sdkmanager --install platform-tools
+      - apt-get update
+      - apt-get -y install pandoc
+      - apt-get -y install ant
+      - chmod u+x install.sh
+      - ./install.sh
+ci:
+  builds:
+    - name: android_build
+      build_target: default
